@@ -59,47 +59,49 @@ Each chapter corresponds to one or multiple commits.
 - Testing services & business logic  
 - Widget/UI testing  
 
----
 
 ## 🧭 How to Use This Repo
 
 1. Clone the repository:
 ```bash
 git clone https://github.com/khaledGuedria17/Flutter2526.git
-
-2. Navigate into the project folder:
+```
+2. Navigate into the project folder
 ```bash
 cd Flutter2526
+```
 
 3. Install dependencies:
 ```bash
 flutter pub get
+```
 
 4. Run the app:
 ```bash
 flutter run
+```
 
 5. Check out a specific workshop/session using commit history:
 ```bash
 git log
 git checkout <commit-id>
+```
+---
 
-## Purpose & Learning Goals
+## 📚 Purpose & Learning Goals
 
 By following the repository commits sequentially, students will learn how to:
 
-Structure a Flutter project professionally
+- Structure a Flutter project professionally
 
-Build a complete functional application
+- Build a complete functional application
 
-Work with backend APIs
+- Work with backend APIs
 
-Persist local data
+- Persist local data
 
-Use modern state management
+- Use modern state management
 
-Write clean, maintainable code
+- Write clean, maintainable code
 
-Add unit and widget tests
-
-
+- Add unit and widget tests
