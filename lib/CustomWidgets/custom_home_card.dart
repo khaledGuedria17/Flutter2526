@@ -17,7 +17,7 @@ class CustomHomeCard extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.asset(game.image, height: 100),
+              Image.network(game.image, height: 100),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         BottomNavScreen.routeName: (context) => BottomNavScreen(),
         TabbarScreen.routeName: (context) => TabbarScreen(),
       },
-      //initialRoute: TabbarScreen.routeName,
+      initialRoute: TabbarScreen.routeName,
       //home: HomeScreen(),
     );
   }

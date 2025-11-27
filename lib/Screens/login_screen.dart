@@ -3,16 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:myapp/CustomWidgets/custom_button.dart';
 import 'package:myapp/Screens/bottom_nav_screen.dart';
 import 'package:myapp/Screens/home_screen.dart';
+import 'package:myapp/Services/games_service.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   //route
   static final String routeName = "/";
-  //var
-  var username = "";
-  var password = "";
-  GlobalKey<FormState> formKey = GlobalKey();
 
   LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  //var
+  var username = "";
+
+  var password = "";
+
+  GlobalKey<FormState> formKey = GlobalKey();
+
+  //states
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
