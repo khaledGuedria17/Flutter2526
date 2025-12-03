@@ -1,18 +1,32 @@
 import 'dart:convert';
+import 'package:hive/hive.dart';
+part 'game.g.dart';
 
+@HiveType(typeId: 0)
 class Game {
   //att
-  late String name, image, description;
-  late int price;
+
+  @HiveField(0)
+  String name;
+  @HiveField(1)
+  String image;
+  @HiveField(2)
+  String description;
+  @HiveField(3)
+  int price;
 
   //constructor
-  Game.empty();
   Game(this.image, this.name, this.price, this.description);
 
   //JSON serialization
   //encode
-  static String toJson() {
-    return '';
+  Map<String, dynamic> toJson() {
+    return {
+      "title": name,
+      //"name": this.price,
+      "short_description": description,
+      "thumbnail": image,
+    };
   }
 
   //decode

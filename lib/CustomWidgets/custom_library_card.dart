@@ -18,9 +18,12 @@ class _CustomLibraryCardState extends State<CustomLibraryCard> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Image.asset(widget.game.image, height: 80),
-            Text(widget.game.name),
-            Text("${widget.game.price} TND"),
+            Image.network(widget.game.image, height: 80),
+            Text(widget.game.name, textAlign: TextAlign.center),
+            Text(
+              "${widget.game.price} TND",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ],
         ),
       ),

@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:myapp/CustomWidgets/custom_library_card.dart';
 import 'package:myapp/Models/game.dart';
+import 'package:myapp/Services/games_service.dart';
 
 class LibraryScreen extends StatelessWidget {
   //route
@@ -20,17 +23,26 @@ class LibraryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
-          itemCount: games.length,
-          itemBuilder: (context, index) {
-            return CustomLibraryCard(games[index]);
-          },
-        ),
+      body: FutureBuilder(
+        future: GamesService().getAll(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                ),
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  return CustomLibraryCard(snapshot.data![index]);
+                },
+              ),
+            );
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
       ),
     );
   }

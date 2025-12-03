@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/Screens/bottom_nav_screen.dart';
+import 'package:myapp/Screens/favorites_screen.dart';
 import 'package:myapp/Screens/tabbar_screen.dart';
 
 class CustomDrawer extends StatefulWidget {
@@ -50,6 +51,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   title: Text("Navigation du bas"),
                   leading: Icon(Icons.download),
                 ),
+          ListTile(
+            onTap: () {
+              Navigator.pushNamed(context, FavoritesScreen.routeName);
+            },
+            title: Text("Favorites"),
+            leading: Icon(Icons.favorite_border_outlined),
+          ),
         ],
       ),
     );

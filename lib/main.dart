@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/Screens/bottom_nav_screen.dart';
 import 'package:myapp/Screens/details_screen.dart';
+import 'package:myapp/Screens/favorites_screen.dart';
 import 'package:myapp/Screens/home_screen.dart';
 import 'package:myapp/Screens/library_screen.dart';
 import 'package:myapp/Screens/login_screen.dart';
 import 'package:myapp/Screens/tabbar_screen.dart';
+import 'package:myapp/Services/favorites_service.dart';
 
-void main() {
+void main() async {
+  await FavoritesService().initHive();
   runApp(const MyApp());
 }
 
@@ -29,6 +32,7 @@ class MyApp extends StatelessWidget {
         DetailsScreen.routeName: (context) => DetailsScreen(),
         BottomNavScreen.routeName: (context) => BottomNavScreen(),
         TabbarScreen.routeName: (context) => TabbarScreen(),
+        FavoritesScreen.routeName: (context) => FavoritesScreen(),
       },
       initialRoute: TabbarScreen.routeName,
       //home: HomeScreen(),

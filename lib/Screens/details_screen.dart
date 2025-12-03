@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/Models/game.dart';
+import 'package:myapp/Services/favorites_service.dart';
 
 class DetailsScreen extends StatefulWidget {
   //routes
   static final String routeName = "/Details";
   //var
   var counter = 3000;
+  var isLike = false;
   late Game currentGame;
   DetailsScreen({super.key});
 
@@ -25,6 +27,19 @@ class _DetailsScreenState extends State<DetailsScreen> {
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.deepPurpleAccent,
+        actions: [
+          IconButton(
+            onPressed: () {
+              FavoritesService().insert(widget.currentGame);
+              setState(() {
+                widget.isLike = true;
+              });
+            },
+            icon: widget.isLike
+                ? Icon(Icons.favorite)
+                : Icon(Icons.favorite_border_outlined),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
