@@ -4,24 +4,23 @@ import 'package:myapp/CustomWidgets/custom_button.dart';
 import 'package:myapp/Models/user.dart';
 import 'package:myapp/Screens/bottom_nav_screen.dart';
 import 'package:myapp/Screens/home_screen.dart';
-import 'package:myapp/Screens/resgister_screen.dart';
 import 'package:myapp/Services/auth_service.dart';
 import 'package:myapp/Services/games_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginScreen extends StatefulWidget {
+class ResgisterScreen extends StatefulWidget {
   //route
-  static final String routeName = "/";
+  static final String routeName = "/Register";
 
-  LoginScreen({super.key});
+  ResgisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<ResgisterScreen> createState() => _ResgisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _ResgisterScreenState extends State<ResgisterScreen> {
   //var
   var username = "";
+  var email = "";
   var password = "";
 
   GlobalKey<FormState> formKey = GlobalKey();
@@ -31,11 +30,6 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    SharedPreferences.getInstance().then((sp) {
-      if (sp.containsKey("currentUser")) {
-        Navigator.pushReplacementNamed(context, BottomNavScreen.routeName);
-      }
-    });
   }
 
   @override
@@ -43,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "S'authentifier",
+          "S'enregistrer",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
         ),
         backgroundColor: Colors.deepPurpleAccent,
@@ -59,10 +53,21 @@ class _LoginScreenState extends State<LoginScreen> {
               Image.asset("assets/minecraft.jpg"),
               //2
               TextFormField(
+                decoration: InputDecoration(hint: Text("Email")),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Email should not be empty';
+                  }
+                },
+                onSaved: (value) {
+                  email = value!;
+                },
+              ),
+              TextFormField(
                 decoration: InputDecoration(hint: Text("Username")),
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Username shopuld not be empty';
+                    return 'Username should not be empty';
                   }
                 },
                 onSaved: (value) {
@@ -78,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Password shopuld not be empty';
+                    return 'Password should not be empty';
                   }
                 },
                 onSaved: (value) {
@@ -90,33 +95,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 onTap: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
-                    AuthService().login(
-                      User(username, "name", password, "role", "tier"),
+                    print(email + " : " + username + " : " + password);
+                    AuthService().addUser(
+                      User(email, username, password, "student", "regular"),
                       context,
                     );
                   }
                 },
-                child: CustomButton("S'authentifier", Colors.deepPurpleAccent),
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, ResgisterScreen.routeName);
-                },
                 child: CustomButton("Créer un compte", Colors.red),
-              ),
-              //5
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                spacing: 15,
-                children: [
-                  //1
-                  Text("Mot de passe oublié?"),
-                  //2
-                  Text(
-                    "Cliquer Ici",
-                    style: TextStyle(color: Colors.deepPurpleAccent),
-                  ),
-                ],
               ),
             ],
           ),

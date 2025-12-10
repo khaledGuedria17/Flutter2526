@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/Screens/bottom_nav_screen.dart';
 import 'package:myapp/Screens/favorites_screen.dart';
+import 'package:myapp/Screens/login_screen.dart';
 import 'package:myapp/Screens/tabbar_screen.dart';
+import 'package:myapp/Services/auth_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomDrawer extends StatefulWidget {
   //var
@@ -18,7 +21,19 @@ class _CustomDrawerState extends State<CustomDrawer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("G-Store Esprit", style: TextStyle(color: Colors.white)),
+        title: FutureBuilder(
+          future: AuthService().getCurrentSession(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Text(
+                snapshot.data!.name,
+                style: TextStyle(color: Colors.white),
+              );
+            } else {
+              return LinearProgressIndicator();
+            }
+          },
+        ),
         backgroundColor: Colors.deepPurpleAccent,
       ),
       body: Column(
@@ -57,6 +72,20 @@ class _CustomDrawerState extends State<CustomDrawer> {
             },
             title: Text("Favorites"),
             leading: Icon(Icons.favorite_border_outlined),
+          ),
+          ListTile(
+            onTap: () {
+              SharedPreferences.getInstance().then((sp) {
+                sp.clear().then((value) {
+                  Navigator.pushReplacementNamed(
+                    context,
+                    LoginScreen.routeName,
+                  );
+                });
+              });
+            },
+            title: Text("Logout", style: TextStyle(color: Colors.red)),
+            leading: Icon(Icons.logout, color: Colors.red),
           ),
         ],
       ),

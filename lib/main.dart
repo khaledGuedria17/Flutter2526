@@ -5,6 +5,7 @@ import 'package:myapp/Screens/favorites_screen.dart';
 import 'package:myapp/Screens/home_screen.dart';
 import 'package:myapp/Screens/library_screen.dart';
 import 'package:myapp/Screens/login_screen.dart';
+import 'package:myapp/Screens/resgister_screen.dart';
 import 'package:myapp/Screens/tabbar_screen.dart';
 import 'package:myapp/Services/favorites_service.dart';
 
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         LoginScreen.routeName: (context) => LoginScreen(),
+        ResgisterScreen.routeName: (context) => ResgisterScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
         LibraryScreen.routeName: (context) => LibraryScreen(),
         DetailsScreen.routeName: (context) => DetailsScreen(),
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
         TabbarScreen.routeName: (context) => TabbarScreen(),
         FavoritesScreen.routeName: (context) => FavoritesScreen(),
       },
-      initialRoute: TabbarScreen.routeName,
+      initialRoute: LoginScreen.routeName,
       //home: HomeScreen(),
     );
   }
